@@ -12,8 +12,9 @@ const checkoutRoutes = require('../my-app/Routes/checkout/checout')
 const cors = require('cors')
 app.use(express.json())
 const corsOptions = {
-  origin: ['http://localhost:4000', 'https://burger-website-psi.vercel.app'], // No trailing slash
+  origin: ['http://localhost:4000', 'https://burger-website-psi.vercel.app/'], // No trailing slash
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  Headers: ["Content-Type", "Authorization", "application/json"],
   credentials: true,
 };
 
