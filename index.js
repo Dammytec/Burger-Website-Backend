@@ -12,6 +12,13 @@ const checkoutRoutes = require('../my-app/Routes/checkout/checout')
 const cors = require('cors')
 app.use(express.json())
 app.use(cors())
+const corsOptions = {
+  origin: 'http://localhost:4000', // Allow your frontend origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow cookies to be sent
+};
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight for all routes
 
 app.use((req, res, next) => {
   if (req.method === 'POST' || req.method === 'PUT') {
