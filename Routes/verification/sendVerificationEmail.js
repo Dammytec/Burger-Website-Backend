@@ -1,7 +1,7 @@
 const transporter = require('../verification/transporter')
 
 const sendVerificationEmail = async (email , token) => {
-    const verificationUrl = `http://localhost:5000/verify/${token}`;
+    const verificationUrl = `https://burger-website-backend.vercel.app//verify/${token}`;
 
     console.log('Verification URL:', verificationUrl);
     const mailOptions = {
