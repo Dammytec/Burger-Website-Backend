@@ -14,11 +14,12 @@ const WebSocket = require("ws");
 const http = require("http");
 app.use(express.json())
 const corsOptions = {
-  origin: ['http://localhost:4000', 'https://burger-website-psi.vercel.app'], // No trailing slash
+  origin: 'https://burger-website-psi.vercel.app', // Your frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ["Content-Type", "Authorization"], // Use 'allowedHeaders' instead of 'Headers'
   credentials: true,
 };
+
+
 
 // Use the CORS options for all routes
 app.use(cors(corsOptions));
