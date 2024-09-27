@@ -11,14 +11,14 @@ const cartRoutes = require('../my-app/Routes/cart/cart')
 const checkoutRoutes = require('../my-app/Routes/checkout/checout')
 const cors = require('cors')
 app.use(express.json())
-app.use(cors())
 const corsOptions = {
-  origin: 'http://localhost:4000', // Allow your frontend origin
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Allow cookies to be sent
+  origin: ['http://localhost:4000', 'https://burger-website-psi.vercel.app'], // No trailing slash
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
 };
+
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Enable preflight for all routes
+app.options('*', cors(corsOptions));
 
 app.use((req, res, next) => {
   if (req.method === 'POST' || req.method === 'PUT') {
