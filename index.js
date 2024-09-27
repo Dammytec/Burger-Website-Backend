@@ -10,15 +10,20 @@ const authRoutes = require('../my-app/Routes/auth/auth')
 const cartRoutes = require('../my-app/Routes/cart/cart')
 const checkoutRoutes = require('../my-app/Routes/checkout/checout')
 const cors = require('cors')
+const WebSocket = require("ws");
+const http = require("http");
 app.use(express.json())
 const corsOptions = {
-  origin: ['http://localhost:4000', 'https://burger-website-psi.vercel.app/'], // No trailing slash
+  origin: ['http://localhost:4000', 'https://burger-website-psi.vercel.app'], // No trailing slash
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  Headers: ["Content-Type", "Authorization", "application/json"],
+  allowedHeaders: ["Content-Type", "Authorization"], // Use 'allowedHeaders' instead of 'Headers'
   credentials: true,
 };
 
+// Use the CORS options for all routes
 app.use(cors(corsOptions));
+
+// Enable pre-flight request handling for all routes
 app.options('*', cors(corsOptions));
 
 app.use((req, res, next) => {
@@ -42,9 +47,31 @@ app.use('/cart' , cartRoutes)
 app.use('/checkout', checkoutRoutes)
 
 
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+// WebSocket connection handler
+wss.on("connection", (ws) => {
+  console.log("New client connected");
+
+  ws.on("message", (message) => {
+    console.log("Received:", message);
+    ws.send("Hello, you sent -> " + message);
+  });
+
+  ws.on("close", () => {
+    console.log("Client disconnected");
+  });
+
+  ws.on("error", (error) => {
+    console.error("WebSocket error:", error);
+    ws.send(JSON.stringify({ error: "Internal server error" }));
+  });
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(`WebSocket server is running on ws://localhost:${PORT}/`);
     
 })
  
