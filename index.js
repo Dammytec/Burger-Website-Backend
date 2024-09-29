@@ -4,10 +4,10 @@ const PORT = process.env.PORT || 5000
 const mongoose = require('mongoose')
 require("dotenv").config()
 const Register = require('./register')
-const productRoutes = require('../my-app/Routes/product/product')
-const authRoutes = require('../my-app/Routes/auth/auth')
-const cartRoutes = require('../my-app/Routes/cart/cart')
-const checkoutRoutes = require('../my-app/Routes/checkout/checout')
+const productRoutes = require('./Routes/product/product')
+const authRoutes = require('./Routes/auth/auth')
+const cartRoutes = require('./Routes/cart/cart')
+const checkoutRoutes = require('./Routes/checkout/checout')
 const cors = require('cors')
 const WebSocket = require("ws");
 const http = require("http");
