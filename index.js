@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 5000
 const mongoose = require('mongoose')
-const Products = require('../my-app/products')
 require("dotenv").config()
 const Register = require('../my-app/register')
 const productRoutes = require('../my-app/Routes/product/product')
@@ -91,8 +90,8 @@ const getUsersSortedByFirstnameAsc = async () => {
   }
  
 
-
-  mongoose.connect(process.env.DB_CONNECTI)
+const dbUrl = process.env.DB_CONNECTI
+  mongoose.connect(dbUrl)
   .then(() => {
       console.log('Database connected successfully');
       getUsersSortedByFirstnameAsc();  // Call your function here
@@ -100,3 +99,5 @@ const getUsersSortedByFirstnameAsc = async () => {
   .catch((err) => {
       console.error('Database connection error:', err);
   });
+
+
