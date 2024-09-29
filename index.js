@@ -13,19 +13,24 @@ const cors = require('cors')
 const WebSocket = require("ws");
 const http = require("http");
 app.use(express.json())
-const corsOptions = {
-  origin: 'https://burger-website-psi.vercel.app', // Your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+const allowedOrigins = ['http://localhost:4000', 'https://burger-website-psi.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
-};
-
-
+}));
 
 // Use the CORS options for all routes
-app.use(cors(corsOptions));
+app.options('*', cors());
 
 // Enable pre-flight request handling for all routes
-app.options('*', cors(corsOptions));
+
 
 app.use((req, res, next) => {
   if (req.method === 'POST' || req.method === 'PUT') {
