@@ -3,7 +3,7 @@ const app = express()
 const PORT = process.env.PORT || 5000
 const mongoose = require('mongoose')
 require("dotenv").config()
-const Register = require('../my-app/register')
+const Register = require('./register')
 const productRoutes = require('../my-app/Routes/product/product')
 const authRoutes = require('../my-app/Routes/auth/auth')
 const cartRoutes = require('../my-app/Routes/cart/cart')
