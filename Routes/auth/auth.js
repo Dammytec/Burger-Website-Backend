@@ -99,7 +99,7 @@ routes.post('/reset-password', async (req , res) => {
     user.resetPasswordExpires = Date.now() + 3600000
     await user.save()
 
-    const resetUrl = `http://localhost:5000/reset-password/${token}`
+    const resetUrl = `https://burger-website-backend.vercel.app/reset-password/${token}`
     const mailOptions = {
         from : process.env.EMAIL_USER,
         to: user.email,

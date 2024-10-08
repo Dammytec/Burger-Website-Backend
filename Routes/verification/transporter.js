@@ -12,6 +12,7 @@ const transporter = nodemailer.createTransport({
     tls: {
         rejectUnauthorized: false // This is sometimes needed for self-signed certificates
     }
+    
 })
 
 module.exports = transporter
